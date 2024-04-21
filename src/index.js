@@ -10,6 +10,7 @@ function renderNames(movie){
     let list = document.createElement("li")
     listF.appendChild(list)
     list.innerText = movie.title
+    list.dataset.id = movie.id
     list.addEventListener("click", onListMovieClick)
 }
 getNames().then(movies => movies.forEach(movie => renderNames(movie)))
@@ -22,7 +23,9 @@ function getMovieDetails(id){
 }
 function onListMovieClick(e){
     e.preventDefault()
-    getMovieDetails(e.target.id)
+    const movieId = e.target.dataset.id
+    console.log(movieId);
+    getMovieDetails(movieId)
     .then(renderMovieDetails)
 }
 
