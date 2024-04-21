@@ -24,22 +24,33 @@ function getMovieDetails(id){
 function onListMovieClick(e){
     e.preventDefault()
     const movieId = e.target.dataset.id
-    console.log(movieId);
     getMovieDetails(movieId)
     .then(renderMovieDetails)
 }
 
 function renderMovieDetails(movie){
-    let poster = document.getElementById("poster")
+    const poster = document.getElementById("poster")
     poster.src = movie.poster
-    let name = document.getElementById("title")
+    const name = document.getElementById("title")
     name.innerText = movie.title
-    let runtime = document.getElementById("runtime")
+    const runtime = document.getElementById("runtime")
     runtime.innerText = movie.runtime
-    let showtime = document.getElementById("showtime")
+    const showtime = document.getElementById("showtime")
     showtime.innerText = movie.showtime
-    let info = document.getElementById("film-info")
+    const info = document.getElementById("film-info")
     info.innerText = movie.description
-    let tickets = document.getElementById("ticket-num")
+    const tickets = document.getElementById("ticket-num")
     tickets.innerText = parseInt(movie.capacity) - parseInt(movie.tickets_sold)  
 }
+
+//Update ticket information
+document.getElementById("buy-ticket").addEventListener("click", (e)=> {
+    e.preventDefault()
+    const tickets = document.getElementById("ticket-num")
+    if(tickets.innerText > 0){
+    tickets.innerText = (parseInt(tickets.innerText) -1)
+    } else {
+    tickets.innerText = `Movie Sold Out`
+    }
+})
+
