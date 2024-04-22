@@ -1,4 +1,6 @@
 const baseUrl = "http://localhost:3000/films"
+
+
 //get movie names
 function getNames(){
     return fetch(baseUrl)
@@ -44,13 +46,19 @@ function renderMovieDetails(movie){
 }
 
 //Update ticket information
-document.getElementById("buy-ticket").addEventListener("click", (e)=> {
+const button = document.getElementById("buy-ticket")
+    button.addEventListener("click", (e)=> {
     e.preventDefault()
     const tickets = document.getElementById("ticket-num")
     if(tickets.innerText > 0){
     tickets.innerText = (parseInt(tickets.innerText) -1)
     } else {
-    tickets.innerText = `Movie Sold Out`
+        tickets.innerText = "Sold Out"
     }
+})
+
+document.addEventListener("DOMContentLoaded", ()=> {
+    getNames()
+    getMovieDetails()
 })
 
